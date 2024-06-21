@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { CuestionariosService } from './cuestionarios.service';
-import { CreateCuestionarioDto } from './dto/create-cuestionario.dto';
-import { UpdateCuestionarioDto } from './dto/update-cuestionario.dto';
+import { CreateCuestionarioDto } from 'src/application/dtos/create-cuestionario.dto';
+import { UpdateCuestionarioDto } from 'src/application/dtos/update-cuestionario.dto';
+import { CuestionariosService } from 'src/application/services/cuestionarios.service';
 
 @Controller('cuestionarios')
 export class CuestionariosController {

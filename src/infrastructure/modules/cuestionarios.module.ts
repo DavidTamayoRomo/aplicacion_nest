@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { CuestionariosService } from './cuestionarios.service';
-import { CuestionariosController } from './cuestionarios.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Cuestionario } from './entities/cuestionario.entity';
+import { CuestionariosController } from '../controllers/cuestionarios.controller';
+import { CuestionariosService } from 'src/application/services/cuestionarios.service';
+import { Cuestionario } from 'src/domain/entities/cuestionario.entity';
 
 @Module({
   controllers: [CuestionariosController],

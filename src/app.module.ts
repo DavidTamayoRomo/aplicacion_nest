@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { CuestionariosModule } from './cuestionarios/cuestionarios.module';
-import { DatabaseModule } from './database/database.module';
+import { DatabaseModule } from './infrastructure/config/database/database.module';
+import { CuestionariosModule } from './infrastructure/modules/cuestionarios.module';
 
 @Module({
   imports: [
