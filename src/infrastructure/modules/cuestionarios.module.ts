@@ -8,7 +8,7 @@ import { Cuestionario } from 'src/domain/entities/cuestionario.entity';
   controllers: [CuestionariosController],
   providers: [CuestionariosService],
   imports:[
-    TypeOrmModule.forFeature([Cuestionario])
+    TypeOrmModule.forFeature([Cuestionario]),
   ]
 })
 export class CuestionariosModule {}

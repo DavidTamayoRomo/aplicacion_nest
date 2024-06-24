@@ -13,7 +13,7 @@ export class CuestionariosService {
     private readonly cuestionarioRepository: Repository<Cuestionario>
   ) { }
 
-  async create(createCuestionarioDto: CreateCuestionarioDto): Promise<CreateCuestionarioDto> {
+  async create(createCuestionarioDto: CreateCuestionarioDto){
     try {
       const cuestionario = this.cuestionarioRepository.create(createCuestionarioDto);
       await this.cuestionarioRepository.save(cuestionario);
