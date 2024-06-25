@@ -4,14 +4,16 @@ import { CuestionariosModule } from './infrastructure/modules/cuestionarios.modu
 import { PreguntasModule } from './infrastructure/modules/preguntas.module';
 import { CategoriaModule } from './infrastructure/modules/categoria.module';
 import { RespuestaModule } from './infrastructure/modules/respuesta.module';
+import { RangoResultadoModule } from './infrastructure/modules/rango-resultado.module';
 
 @Module({
   imports: [
+    DatabaseModule,
     CuestionariosModule, 
     PreguntasModule,
     CategoriaModule,
     RespuestaModule,
-    DatabaseModule
+    RangoResultadoModule,
   ],
   controllers: [],
   providers: [],

@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AuditoriaEntity } from "./auditoria.entity";
 import { Pregunta } from "./pregunta.entity";
+import { RangoResultado } from "./rango-resultado.entity";
 
 @Entity({ name: 'SM_CUESTIONARIO', schema: 'SM' })
 export class Cuestionario extends AuditoriaEntity {
@@ -39,6 +40,13 @@ export class Cuestionario extends AuditoriaEntity {
         (pregunta)=> pregunta.cuestionario,
         { cascade:true }
     )
-    preguntas?: Pregunta[ ];
+    preguntas?: Pregunta[];
+
+    @OneToMany(
+        () => RangoResultado, 
+        (rangoResultado) => rangoResultado.cuestionario, 
+        { cascade: true }
+    )
+    rangosResultados?: RangoResultado[];
 
 }
