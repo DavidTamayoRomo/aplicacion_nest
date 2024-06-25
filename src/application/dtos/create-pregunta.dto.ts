@@ -21,4 +21,8 @@ export class CreatePreguntaDto {
     @IsUUID()
     cuestionarioId: string;
 
+    @ApiProperty({ description: 'The ID of the related categoria', example: 'uuid-v4' })
+    @IsUUID()
+    categoriaId: string;
+
 }

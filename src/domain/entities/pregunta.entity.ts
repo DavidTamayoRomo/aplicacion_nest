@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { AuditoriaEntity } from "./auditoria.entity";
 import { Cuestionario } from "./cuestionario.entity";
+import { Categoria } from "./categoria.entity";
 
 @Entity({ name: 'SM_PREGUNTA', schema: 'SM' })
 export class Pregunta extends AuditoriaEntity{
@@ -28,5 +29,12 @@ export class Pregunta extends AuditoriaEntity{
     )
     @JoinColumn({ name: 'CUESTIONARIO_ID' })
     cuestionario: Cuestionario;
+
+
+    @ManyToOne(
+        () => Categoria
+    )
+    @JoinColumn({ name: 'CATEGORIA_ID' })
+    categoria: Categoria;
 
 }
