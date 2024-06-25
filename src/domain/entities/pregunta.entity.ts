@@ -1,12 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AuditoriaEntity } from "./auditoria.entity";
 import { Cuestionario } from "./cuestionario.entity";
 import { Categoria } from "./categoria.entity";
+import { Respuesta } from "./respuesta.entity";
 
 @Entity({ name: 'SM_PREGUNTA', schema: 'SM' })
-export class Pregunta extends AuditoriaEntity{
-    
+export class Pregunta extends AuditoriaEntity {
+
     @ApiProperty()
     @PrimaryGeneratedColumn('uuid', { name: 'IDENTIFICADOR' })
     id: string;
@@ -36,5 +37,12 @@ export class Pregunta extends AuditoriaEntity{
     )
     @JoinColumn({ name: 'CATEGORIA_ID' })
     categoria: Categoria;
+
+    @OneToMany(
+        () => Respuesta, 
+        (respuesta) => respuesta.pregunta, 
+        { cascade: true }
+    )
+    respuestas: Respuesta[];
 
 }
