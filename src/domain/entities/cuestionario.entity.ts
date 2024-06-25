@@ -1,9 +1,10 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AuditoriaEntity } from "./auditoria.entity";
+import { Pregunta } from "./pregunta.entity";
 
 @Entity({ name: 'SM_CUESTIONARIO', schema: 'SM' })
-export class Cuestionario  {
+export class Cuestionario extends AuditoriaEntity {
     
     @ApiProperty()
     @PrimaryGeneratedColumn('uuid', { name: 'ID' })
@@ -33,12 +34,11 @@ export class Cuestionario  {
     @Column({ type: 'int', nullable: true, name: 'TIEMPO_ESPERA' })
     tiempoEspera: number;
 
-    /* @BeforeInsert()
-    @BeforeUpdate()
-    validateDates() {
-        if (this.fechaFin && this.fechaFin < this.fechaInicio) {
-            throw new Error('La fecha de fin no puede ser menor que la fecha de inicio.');
-        }
-    } */
+    @OneToMany(
+        () => Pregunta,
+        (pregunta)=> pregunta.cuestionario,
+        { cascade:true }
+    )
+    preguntas?: Pregunta[ ];
 
 }
