@@ -3,6 +3,7 @@ import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGenerated
 import { AuditoriaEntity } from "./auditoria.entity";
 import { Pregunta } from "./pregunta.entity";
 import { RangoResultado } from "./rango-resultado.entity";
+import { Resultado } from "./resultado.entity";
 
 @Entity({ name: 'SM_CUESTIONARIO', schema: 'SM' })
 export class Cuestionario extends AuditoriaEntity {
@@ -48,5 +49,12 @@ export class Cuestionario extends AuditoriaEntity {
         { cascade: true }
     )
     rangosResultados?: RangoResultado[];
+
+    @OneToMany(
+        () => Resultado, 
+        (resultado) => resultado.cuestionario, 
+        { cascade: true }
+    )
+    resultados?: Resultado[];
 
 }

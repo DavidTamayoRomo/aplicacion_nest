@@ -5,6 +5,7 @@ import { PreguntasModule } from './infrastructure/modules/preguntas.module';
 import { CategoriaModule } from './infrastructure/modules/categoria.module';
 import { RespuestaModule } from './infrastructure/modules/respuesta.module';
 import { RangoResultadoModule } from './infrastructure/modules/rango-resultado.module';
+import { ResultadoModule } from './infrastructure/modules/resultado.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { RangoResultadoModule } from './infrastructure/modules/rango-resultado.m
     CategoriaModule,
     RespuestaModule,
     RangoResultadoModule,
+    ResultadoModule,
   ],
   controllers: [],
   providers: [],
