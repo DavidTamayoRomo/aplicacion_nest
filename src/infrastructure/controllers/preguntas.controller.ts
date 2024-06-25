@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreatePreguntaDto } from 'src/application/dtos/create-pregunta.dto';
 import { UpdatePreguntaDto } from 'src/application/dtos/update-pregunta.dto';
@@ -26,6 +26,20 @@ export class PreguntasController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.preguntasService.findOne(id);
+  }
+
+  @Get('/estado')
+  @ApiResponse({ status: 200, description: 'Get preguntas by estado', type: [Pregunta] })
+  findByEstado(@Query('estado') estado: string) {
+    const parsedEstado = estado === 'true' ? true : estado === 'false' ? false : null;
+    return this.preguntasService.findByEstado(parsedEstado);
+  }
+
+  @Get('/cuestionario/:cuestionarioId')
+  @ApiResponse({ status: 200, description: 'Get preguntas by Cuestionario ID', type: [Pregunta] })
+  @ApiResponse({ status: 404, description: 'Not Found' })
+  findByCuestionarioId(@Param('cuestionarioId') cuestionarioId: string) {
+    return this.preguntasService.findByCuestionarioId(cuestionarioId);
   }
 
   @Patch(':id')

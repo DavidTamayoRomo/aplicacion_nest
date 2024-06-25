@@ -16,7 +16,7 @@ export class PreguntasService {
     private readonly cuestionarioRepository: Repository<Cuestionario>
   ) { }
 
-  async create(createPreguntaDto: CreatePreguntaDto) {
+  async create(createPreguntaDto: CreatePreguntaDto): Promise<Pregunta> {
     try {
       const { cuestionarioId, ...rest } = createPreguntaDto;
       const cuestionario = await this.cuestionarioRepository.findOne({ where: { id: cuestionarioId } });
@@ -35,8 +35,10 @@ export class PreguntasService {
 
   async findAll(): Promise<Pregunta[]> {
     try {
-      const preguntas = await this.preguntaRepository.find({ relations: ['cuestionario'] });
-      return preguntas;
+      return await this.preguntaRepository.find({
+        where: { estado: true },
+        relations: ['cuestionario']
+      });
     } catch (error) {
       throw new InternalServerErrorException('Ayuda!');
     }
@@ -44,14 +46,14 @@ export class PreguntasService {
 
   async findOne(id: string): Promise<Pregunta> {
     try {
-      const pregunta = await this.preguntaRepository.findOne({ where: { id }, relations: ['cuestionario'] });
+      const pregunta = await this.preguntaRepository.findOne({ where: { id, estado: true }, relations: ['cuestionario'] });
       return pregunta;
     } catch (error) {
       throw new InternalServerErrorException('Ayuda!');
     }
   }
 
-  async update(id: string, updatePreguntaDto: UpdatePreguntaDto) {
+  async update(id: string, updatePreguntaDto: UpdatePreguntaDto): Promise<Pregunta> {
     try {
       const { cuestionarioId, ...rest } = updatePreguntaDto;
 
@@ -92,4 +94,18 @@ export class PreguntasService {
     }
 
   }
+
+
+  async findByCuestionarioId(cuestionarioId: string): Promise<Pregunta[]> {
+    return await this.preguntaRepository.find({
+      where: { cuestionario: { id: cuestionarioId }, estado: true },
+      relations: ['cuestionario'],
+    });
+  }
+
+  async findByEstado(estado: boolean | null): Promise<Pregunta[]> {
+    const whereClause = estado !== null ? { estado } : {};
+    return await this.preguntaRepository.find({ where: whereClause, relations: ['cuestionario'] });
+  }
+
 }
